@@ -1,11 +1,11 @@
 import os
 
-# # FIX: Prevent HuggingFace from creating symlinks on Windows
-# os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
-os.environ["DOCLING_DISABLE_TABLE_MODEL"] = "1"
-os.environ["DOCLING_CPU_ONLY"] = "1"
-os.environ["CUDA_VISIBLE_DEVICES"] = ""
+# MUST BE FIRST BEFORE ANY IMPORT
 os.environ["OPENCV_VIDEOIO_PRIORITY_MSMF"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+os.environ["OPENCV_OPENCL_RUNTIME"] = "disabled"
+os.environ["OPENCV_DISABLE"] = "1"
+
 
 import streamlit as st
 from PIL import Image
@@ -107,18 +107,12 @@ with tab1:
                     f.write(uploaded_file.read())           
                
                 # loader = DoclingLoader(file_path=temp_path, export_type=ExportType.MARKDOWN)
-                # loader = DoclingLoader(
-                #     file_path=temp_path,
-                 
-                #     export_type=ExportType.MARKDOWN
-                # )
                 loader = DoclingLoader(
-                file_path=temp_path,
-                export_type="markdown",
-                do_table_structure=False,
-                do_ocr=False
-            )
-
+                    file_path=temp_path,
+                 
+                    export_type=ExportType.MARKDOWN
+                )
+               
                 docs = loader.load()
                 resume_text = docs[0].page_content
                
