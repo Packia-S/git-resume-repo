@@ -11,7 +11,7 @@ import streamlit as st
 from PIL import Image
 from langchain_docling import DoclingLoader
 from langchain_docling.loader import ExportType
-from docling.document_converter import DocumentConverter, DocumentConverterOptions, ExportFormat
+from docling.document_converter import DocumentConverter
 
 from schema import Profile
 from config import settings
@@ -110,8 +110,8 @@ with tab1:
                     f.write(uploaded_file.read())
                 
                                 
-                options = DocumentConverterOptions(
-                    export_format=ExportFormat.MARKDOWN,  # ensure markdown output
+                options = DocumentConverter(
+                    export_format=ExportType.MARKDOWN,  # ensure markdown output
                     do_table_structure=False,
                     ocr_options=None
                 )
