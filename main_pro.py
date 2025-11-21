@@ -6,12 +6,13 @@ os.environ["DOCLING_DISABLE_TABLE_MODEL"] = "1"
 os.environ["DOCLING_CPU_ONLY"] = "1"
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-from docling.document_converter import DocumentConverter, DocumentConverterOptions, ExportFormat
 
 import streamlit as st
 from PIL import Image
 from langchain_docling import DoclingLoader
 from langchain_docling.loader import ExportType
+from docling.document_converter import DocumentConverter, DocumentConverterOptions, ExportFormat
+
 from schema import Profile
 from config import settings
 from langchain_google_genai import ChatGoogleGenerativeAI
