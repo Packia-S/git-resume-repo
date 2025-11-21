@@ -111,9 +111,12 @@ with tab1:
                 # loader = DoclingLoader(file_path=temp_path, export_type=ExportType.MARKDOWN)
                 loader = DoclingLoader(
                     file_path=temp_path,
-                 
-                    export_type=ExportType.MARKDOWN
+                    do_table_structure=False,
+                    table_format=None,
+                    do_ocr=False,
                 )
+                    # export_type=ExportType.MARKDOWN
+                # )
 
                 docs = loader.load()
                 resume_text = docs[0].page_content
