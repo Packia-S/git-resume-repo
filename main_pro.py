@@ -11,7 +11,6 @@ import streamlit as st
 from PIL import Image
 from langchain_docling import DoclingLoader
 from langchain_docling.loader import ExportType
-from docling.document_converter import DocumentConverter
 
 from schema import Profile
 from config import settings
@@ -107,28 +106,20 @@ with tab1:
             with st.spinner("Extracting Information..."):
                 temp_path = f"temp_{uploaded_file.name}"
                 with open(temp_path, "wb") as f:
-                    f.write(uploaded_file.read())
-                
-                                
-                options = DocumentConverter(
-                    export_format=ExportType.MARKDOWN,  # ensure markdown output
-                    do_table_structure=False,
-                    ocr_options=None
-                )
-
-                converter = DocumentConverter(options=options)
-
-                loader = DoclingLoader(
-                    file_path=temp_path,
-                    converter=converter
-                )
-
+                    f.write(uploaded_file.read())           
+               
                 # loader = DoclingLoader(file_path=temp_path, export_type=ExportType.MARKDOWN)
                 # loader = DoclingLoader(
                 #     file_path=temp_path,
                  
                 #     export_type=ExportType.MARKDOWN
                 # )
+                loader = DoclingLoader(
+                file_path=temp_path,
+                export_type="markdown",
+                do_table_structure=False,
+                do_ocr=False
+            )
 
                 docs = loader.load()
                 resume_text = docs[0].page_content
