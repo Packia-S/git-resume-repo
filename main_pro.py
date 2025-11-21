@@ -6,6 +6,7 @@ os.environ["DOCLING_DISABLE_TABLE_MODEL"] = "1"
 os.environ["DOCLING_CPU_ONLY"] = "1"
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
+from docling.document_converter import DocumentConverter, DocumentConverterOptions, ExportFormat
 
 import streamlit as st
 from PIL import Image
@@ -107,15 +108,25 @@ with tab1:
                 with open(temp_path, "wb") as f:
                     f.write(uploaded_file.read())
                 
-                
-                # loader = DoclingLoader(file_path=temp_path, export_type=ExportType.MARKDOWN)
+                                
+                options = DocumentConverterOptions(
+                    export_format=ExportFormat.MARKDOWN,  # ensure markdown output
+                    do_table_structure=False,
+                    ocr_options=None
+                )
+
+                converter = DocumentConverter(options=options)
+
                 loader = DoclingLoader(
                     file_path=temp_path,
-                    do_table_structure=False,
-                    table_format=None,
-                    do_ocr=False,
+                    converter=converter
                 )
-                    # export_type=ExportType.MARKDOWN
+
+                # loader = DoclingLoader(file_path=temp_path, export_type=ExportType.MARKDOWN)
+                # loader = DoclingLoader(
+                #     file_path=temp_path,
+                 
+                #     export_type=ExportType.MARKDOWN
                 # )
 
                 docs = loader.load()
