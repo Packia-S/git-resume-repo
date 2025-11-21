@@ -5,18 +5,16 @@ import os
 os.environ["DOCLING_DISABLE_TABLE_MODEL"] = "1"
 os.environ["DOCLING_CPU_ONLY"] = "1"
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
-
+os.environ["OPENCV_VIDEOIO_PRIORITY_MSMF"] = "0"
 
 import streamlit as st
 from PIL import Image
 from langchain_docling import DoclingLoader
 from langchain_docling.loader import ExportType
-
 from schema import Profile
 from config import settings
 from langchain_google_genai import ChatGoogleGenerativeAI
 import os 
-
 import pandas as pd
 from dotenv import load_dotenv
 
